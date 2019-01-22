@@ -6,5 +6,32 @@
     </head>
     <body>
         <h1>Tweet Sentiment</h1>
+        <script>
+            function printToConsole(key) {
+                console.log(key)
+                {% for value in data[key] %}
+                    console.log({{value}})
+                {% endfor %}
+            }
+
+            printToConsole("labels")
+            printToConsole("values")
+            
+            setInterval(() => {
+                fetch('/refresh_data')
+                .then((response) => response.json())
+                .then((json) => {
+                    labels = json.sLabel
+                    values = json.sData
+                    
+                    console.log("labels")
+                    console.log(labels)
+
+                    console.log("values")
+                    console.log(values)
+                })
+            }, 1000)
+
+        </script>
     </body>
 </html>
